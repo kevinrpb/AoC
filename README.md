@@ -6,7 +6,7 @@ Advent of Code Solutions
 * [December 1](2019/01/)
 * [December 2](2019/02/)
 * [December 3](2019/03/)
-<!-- * [December 4](2019/04/) -->
+* [December 4](2019/04/)
 <!-- * [December 5](2019/05/) -->
 <!-- * [December 6](2019/06/) -->
 <!-- * [December 7](2019/07/) -->
