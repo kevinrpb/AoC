@@ -60,6 +60,126 @@ To begin, [get your puzzle input](input.txt).
 
 > [Source code here](solution1.py)
 
+Firstly, we are going to define three methods that will execute each of the different operations. These will receive a list with the intcode and the position where the opcode was found. Using that the methods will make the calculations and return `0` if it was successful or `-1` if the program should stop (halt instruction):
+
+```python
+def f_add(code: list, pos: int):
+	add_1 = code[pos + 1]
+	add_2 = code[pos + 2]
+	add_3 = code[pos + 3]
+
+	n_1 = code[add_1]
+	n_2 = code[add_2]
+	n_3 = n_1 + n_2
+
+	code[add_3] = n_3
+
+	return 0
+
+def f_mul(code: list, pos: int):
+	add_1 = code[pos + 1]
+	add_2 = code[pos + 2]
+	add_3 = code[pos + 3]
+
+	n_1 = code[add_1]
+	n_2 = code[add_2]
+	n_3 = n_1 * n_2
+
+	code[add_3] = n_3
+
+	return 0
+
+def f_hal(code: list, pos: int):
+	return -1
+```
+
+To be able to access these functions in an easier way, we store them in a dict keyed by opcodes:
+
+```python
+OP_ADD = 1
+OP_MUL = 2
+OP_HAL = 99
+
+OP = {
+	OP_ADD: f_add,
+	OP_MUL: f_mul,
+	OP_HAL: f_hal
+}
+```
+
+Now we are ready to code the core of the problem: the intcode _interpreter_.
+
+We will be traveling the intcode array secuentially. To do so we store the current position in a variable (our pointer) and loop while that position is within bounds. Each loop we update the pointer by `4`.
+
+```python
+def intcode(code: list):
+	pos = 0
+
+	while pos < len(code):
+		# Update position
+		pos = pos + 4
+```
+
+Next we will extract the opcode from the array and use it to retrieve the method we need to execute from the dictionary.
+
+```python
+def intcode(code: list):
+	pos = 0
+
+	while pos < len(code):
+		# Get opcode and function
+		op = code[pos]
+		f = OP[op]
+
+		# Update position
+		pos = pos + 4
+```
+
+Once we obtain the function, we can call it and check the result for the halt operation.
+
+```python
+def intcode(code: list):
+	pos = 0
+
+	while pos < len(code):
+		# Get opcode and function
+		op = code[pos]
+		f = OP[op]
+
+		# Call method
+		res = f(code, pos)
+
+		# Check if halt
+		if res == -1:
+			break
+
+		# Update position
+		pos = pos + 4
+```
+
+Now we are all set to find the solution (remember to change the second and third items!).
+
+```python
+# Read input and cast into array of ints
+code = [int(a) for a in open("input.txt").read().split(",")]
+
+# Set initial state
+code[1] = 12
+code[2] = 2
+
+# Do intcode
+intcode(code)
+
+# Retrieve result
+print("Solution is {}".format(code[0]))
+```
+
+<details>
+	<summary>Solution</summary>
+
+	Solution is 3654868
+</details>
+
 ## Problem II
 
 "Good, the new computer seems to be working correctly! Keep it nearby during this mission - you'll probably use it again. Real Intcode computers support many more features than your new one, but we'll let you know what they are as you need them."
@@ -85,3 +205,48 @@ Although it hasn't changed, you can still [get your puzzle input](input.txt).
 ### Solution
 
 > [Source code here](solution2.py)
+
+Once we have our intcode interpreter working, attacking the second part is arguably manageable. You guessed it: we are going to brute-force it.
+
+```python
+def find(initial_code: list, GOAL: int):
+	# Iterate for values of noun and verb
+	for n in range(0, 100):
+		for v in range(0, 100):
+			# Make a copy of the list and set initial state
+			code = list(initial_code)
+			code[1] = n
+			code[2] = v
+
+			# Do intcode and get result
+			intcode(code)
+			res = code[0]
+
+			# If this is the goal, return int
+			if res == GOAL:
+				return (n, v)
+
+	# We couldn't get to the goal...
+	return (None, None)
+```
+
+Now to find our solution:
+
+```python
+initial_code = [int(a) for a in open("input.txt").read().split(",")]
+
+GOAL = 19690720
+
+noun, verb = find(initial_code, GOAL)
+
+print("Noun is\t{}\nVerb is\t{}".format(noun, verb))
+print("100 * noun + verb is {}".format(100 * noun + verb))
+```
+
+<details>
+	<summary>Solution</summary>
+
+	Noun is 70
+	Verb is 14
+	100 * noun + verb is 7014
+</details>

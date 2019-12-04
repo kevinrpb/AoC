@@ -11,6 +11,8 @@ def f_add(code: list, pos: int):
 
 	code[add_3] = n_3
 
+	return 0
+
 def f_mul(code: list, pos: int):
 	add_1 = code[pos + 1]
 	add_2 = code[pos + 2]
@@ -21,6 +23,8 @@ def f_mul(code: list, pos: int):
 	n_3 = n_1 * n_2
 
 	code[add_3] = n_3
+
+	return 0
 
 def f_hal(code: list, pos: int):
 	return -1
@@ -42,6 +46,7 @@ def intcode(code: list):
 		op = code[pos]
 		f = OP[op]
 
+		# Check that we have that operation.. =)
 		if f is None:
 			raise KeyError
 			break
