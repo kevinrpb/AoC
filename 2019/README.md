@@ -1,11 +1,5 @@
-# AoC
-Advent of Code Solutions
-
-## Per year
-
-* [2019](2019/)
-
-## 2019
+# AoC 2019
+Advent of Code Solutions for 2019 event
 
 * [December 1](2019/01/)
 * [December 2](2019/02/)

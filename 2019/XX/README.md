@@ -1,5 +1,7 @@
 # AoC 2019 - December XX
 
+> [Back Home](/)   |   [Back to 2019](2019/)
+
 ## Problem I
 
 ### Solution
