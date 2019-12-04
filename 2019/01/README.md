@@ -31,6 +31,46 @@ To begin, [get your puzzle input](input.txt).
 
 > [Source code here](solution1.py)
 
+First of all, we need to either copy the input into our code or, alternatively, read it from th file:
+
+```python
+def read_input(filename):
+	# read each line
+	lines = open(filename).readlines()
+
+	# cast all numbers from str to int
+	modules = [int(line) for line in lines]
+
+	return modules
+```
+
+We also need a way to calc the fuel for a given modules/mass. This is (almost) trivial:
+
+```python
+import math
+
+def fuel_for_module(mass):
+	return math.floor(mass / 3) - 2
+```
+
+With these two methods, we can find the answer:
+
+```python
+modules = read_input("input.txt")
+
+fuel = [fuel_for_module(module) for module in modules]
+
+total_fuel = sum(fuel)
+
+print("Total sum of fuel is {}".format(total_fuel))
+```
+
+<details>
+	<summary>Solution</summary>
+
+	Total sum of fuel is 3374289
+</details>
+
 ## Problem II
 
 During the second Go / No Go poll, the Elf in charge of the Rocket Equation Double-Checker stops the launch sequence. Apparently, you forgot to include additional fuel for the fuel you just added.
@@ -49,3 +89,38 @@ Although it hasn't changed, you can still [get your puzzle input](input.txt).
 ### Solution
 
 > [Source code here](solution2.py)
+
+In order to add for the new rules, we need to modify our `fuel_for_module()` method. We will start by adding an inner function that calcs the fuel for a given mass. Part I would look like this, then:
+
+```python
+def fuel_for_module(mass):
+	def calc_fuel(mass):
+		return math.floor(mass / 3) - 2
+
+	return calc_fuel(mass)
+```
+
+Now we need to account for the extra mass of the fuel, to do so we will keep track of two things: the total fuel calculated and then _next_ amount of fuel to add. Once said amount is negative or zero, we have finished:
+
+```python
+def fuel_for_module(mass):
+	def calc_fuel(mass):
+		return math.floor(mass / 3) - 2
+
+	# Get initial amount of fuel for mass
+	total_fuel = 0
+	next_fuel = calc_fuel(mass)
+
+	# While we still have fuel to add
+	while next_fuel > 0:
+		total_fuel = total_fuel + next_fuel
+
+		# Update next fuel with the needed for the last added
+		next_fuel = calc_fuel(next_fuel)
+```
+
+<details>
+	<summary>Solution</summary>
+
+	Total sum of fuel is 5058559
+</details>
