@@ -1,6 +1,7 @@
-# AoC 2019 - December 3
 
-> [Back Home](/)   |   [Back to 2019](2019/)
+> [Back Home](/)   &#124;&#124;   [Back to 2019](2019/)
+
+# AoC 2019 - December 3
 
 ## Problem I
 
