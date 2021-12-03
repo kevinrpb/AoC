@@ -23,10 +23,9 @@ def readFileLines(filepath: Path, f: Callable[[str], Any] = str) -> list:
   Returns:
       list: list with the lines, with the defined transformation applied.
   """
-  lines = None
-
+  lines = []
+  
   with open(filepath, 'r') as file:
-    lines = []
 
     # `readline` reads one line (better do it like this for large files)
     # `strip` removes leading/trailing whitespace

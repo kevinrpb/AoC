@@ -6,10 +6,10 @@
 
 ### Solution
 
-> [Source code here](solution1.py)
+> [Source code here](https://github.com/kevinrpb/AoC/blob/main/2021/XX/solution1.py)
 
 ## Problem II
 
 ### Solution
 
-> [Source code here](solution2.py)
+> [Source code here](https://github.com/kevinrpb/AoC/blob/main/2021/XX/solution2.py)

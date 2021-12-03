@@ -1,6 +1,8 @@
-> [Back Home](/)   &#124;&#124;   [Back to 2021](/2021/)
+> [Back Home](/)   &#124;   [Back to 2021](/2021/)
 
 # AoC 2021 - December 1 - Sonar Sweep
+
+> Solutions: [Problem I](#solution)   &#124;   [Problem II](#solution-1)
 
 ## Problem I
 
@@ -18,6 +20,7 @@ For example, suppose you had the following report:
 	269
 	260
 	263
+
 This report indicates that, scanning outward from the submarine, the sonar sweep found depths of 199, 200, 208, 210, and so on.
 
 The first order of business is to figure out how quickly the depth increases, just so you know what you're dealing with - you never know if the keys will get carried into deeper water by an ocean current or a fish or something.
@@ -41,7 +44,38 @@ In this example, there are 7 measurements that are larger than the previous meas
 
 ### Solution
 
-> [Source code here](solution1.py)
+> [Source code here](https://github.com/kevinrpb/AoC/blob/main/2021/01/solution1.py)
+
+First of all, we'll need a function to read our lines into a list of numbers. This can be done simply in a few lines of code:
+
+```python
+lines = []
+
+with open(filepath, 'r') as file: # Open the file to read from it
+	# `readline` reads one line (better do it like this for large files)
+	# `strip` removes leading/trailing whitespace
+	while (line := file.readline().strip()):
+		lines.append(int(line)) # We want integer numbers
+```
+
+Once we do this, checking which of those lines are greater than the previous one is as easy as iterating over them, comparing, and counting.
+
+<span id="code-snippet-count" />
+
+```python
+count = 0
+
+for i in range(1, len(lines)): # Iterate the lines
+	if lines[i] > lines[i - 1]: # Compare each line with the previous
+		count += 1 # Add one to the count
+```
+
+Note that it's important that we start at `1` and not `0`, since the first element doesn't have a previous one!
+
+With the code ready, we can run it and print our results
+
+	There are 2000 measurements
+	  -> 1692 are deeper than the previous one
 
 ## Problem II
 
@@ -81,4 +115,23 @@ Consider sums of a three-measurement sliding window. **How many sums are larger 
 
 ### Solution
 
-> [Source code here](solution2.py)
+> [Source code here](https://github.com/kevinrpb/AoC/blob/main/2021/01/solution2.py)
+
+The tricky part here is creating the sliding windows. To do that, however, we just need to iterate the list of lines. That simple!
+
+```python
+windows = []
+
+for i in range(2, len(lines)):
+	window = lines[i] + lines[i+1] + lines[i+2]
+	windows.append(windows)
+```
+
+Now, instead of checking the previous item in the list, we want two (2) previous ones. That's why we start the range at `2`. Then we can sum the three elements in the window and add that to our list of windows. Since the sliding window is of size `3`, we will end up with two fewer windows than initial lines.
+
+Once we have the windows, since we end up with a list of numbers, we can use [the same logic as earlier](#code-snippet-count) to check how many of them are deeper than the previous.
+
+	There are 2000 measurements
+	  -> 1692 are deeper than the previous one
+	There are 1998 measurement windows
+	  -> 1724 are deeper than the previous one
