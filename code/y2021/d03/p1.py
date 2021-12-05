@@ -1,7 +1,8 @@
 #! /usr/bin/env python3
 
 from pathlib import Path
-from typing import Any, Callable
+
+from code.util.parse import readFileLines
 
 # * INFO
 
@@ -12,8 +13,6 @@ AOC_PROBLEM = 1
 # * UTIL
 
 scriptpath = Path(__file__).parent.resolve()
-
-
 
 def parseLine(line: str) -> tuple:
   elements = line.split(' ')
@@ -32,22 +31,6 @@ print(f'{"="*50}\n')
 inputpath = scriptpath / Path('./input.txt')
 input_lines = readFileLines(inputpath, parseLine)
 
-print(f'There are {len(input_lines)} commands\n')
+print(f'There are {len(input_lines)} inputs\n')
 
 #
-horizontal = depth = 0
-
-for command, number in input_lines:
-  if command == 'forward':
-    horizontal += number
-  elif command == 'down':
-    depth += number
-  elif command == 'up':
-    depth -= number
-
-result = horizontal * depth
-
-print(f'horizontal = {horizontal:8d}')
-print(f'     depth = {depth:8d}')
-print(f'{"-"*20}')
-print(f'         * = {result:8d}')

@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from ...util.parse import readFileLines
+from code.util.parse import readFileLines
 
 # * INFO
 
@@ -31,23 +31,6 @@ print(f'{"="*50}\n')
 inputpath = scriptpath / Path('./input.txt')
 input_lines = readFileLines(inputpath, parseLine)
 
-print(f'There are {len(input_lines)} commands\n')
+print(f'There are {len(input_lines)} inputs\n')
 
 #
-horizontal = depth = aim = 0
-
-for command, number in input_lines:
-  if command == 'forward':
-    horizontal += number
-    depth += aim * number
-  elif command == 'down':
-    aim += number
-  elif command == 'up':
-    aim -= number
-
-result = horizontal * depth
-
-print(f'horizontal = {horizontal:10d}')
-print(f'     depth = {depth:10d}')
-print(f'{"-"*25}')
-print(f'         * = {result:10d}')
