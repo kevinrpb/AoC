@@ -9,7 +9,7 @@
 
 ### Solution
 
-> [Source code here](https://github.com/kevinrpb/AoC/blob/main/aoc-code/y2021/d03/p1.py)
+> [Source code here](https://github.com/kevinrpb/AoC/blob/main/solutions/y2021/d03/p1.py)
 
 
 ## Problem II
@@ -18,4 +18,4 @@
 
 ### Solution
 
-> [Source code here](https://github.com/kevinrpb/AoC/blob/main/aoc-code/y2021/d03/p2.py)
+> [Source code here](https://github.com/kevinrpb/AoC/blob/main/solutions/y2021/d03/p2.py)

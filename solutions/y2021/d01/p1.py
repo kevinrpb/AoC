@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from code.util.parse import readFileLines
+from solutions.util.parse import readFileLines
 
 # * INFO
 

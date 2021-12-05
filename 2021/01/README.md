@@ -44,7 +44,7 @@ In this example, there are 7 measurements that are larger than the previous meas
 
 ### Solution
 
-> [Source code here](https://github.com/kevinrpb/AoC/blob/main/aoc-code/y2021/d01/p1.py)
+> [Source code here](https://github.com/kevinrpb/AoC/blob/main/solutions/y2021/d01/p1.py)
 
 First of all, we'll need a function to read our lines into a list of numbers. This can be done simply in a few lines of code:
 
@@ -115,7 +115,7 @@ Consider sums of a three-measurement sliding window. **How many sums are larger 
 
 ### Solution
 
-> [Source code here](https://github.com/kevinrpb/AoC/blob/main/aoc-code/y2021/d01/p2.py)
+> [Source code here](https://github.com/kevinrpb/AoC/blob/main/solutions/y2021/d01/p2.py)
 
 The tricky part here is creating the sliding windows. To do that, however, we just need to iterate the list of lines. That simple!
 
