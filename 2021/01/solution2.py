@@ -7,7 +7,7 @@ from typing import Any, Callable
 
 AOC_YEAR    = 2021
 AOC_DAY     = 1
-AOC_PROBLEM = 1
+AOC_PROBLEM = 2
 
 # * UTIL
 
@@ -24,7 +24,7 @@ def readFileLines(filepath: Path, f: Callable[[str], Any] = str) -> list:
       list: list with the lines, with the defined transformation applied.
   """
   lines = []
-  
+
   with open(filepath, 'r') as file:
 
     # `readline` reads one line (better do it like this for large files)
@@ -50,6 +50,7 @@ def getWindows(array: list, size: int = 3) -> list:
 # * MAIN
 
 print(f'Advent of Code - {AOC_YEAR} - Day {AOC_DAY:02d} - Problem {AOC_PROBLEM:02d}')
+print(f'{"="*50}\n')
 
 # Get the lines
 inputpath = scriptpath / Path('./input.txt')

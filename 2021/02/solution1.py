@@ -6,7 +6,7 @@ from typing import Any, Callable
 # * INFO
 
 AOC_YEAR    = 2021
-AOC_DAY     = 1
+AOC_DAY     = 2
 AOC_PROBLEM = 1
 
 # * UTIL
@@ -35,23 +35,39 @@ def readFileLines(filepath: Path, f: Callable[[str], Any] = str) -> list:
 
   return lines
 
+def parseLine(line: str) -> tuple:
+  elements = line.split(' ')
+  command = elements[0]
+  number = int(elements[1])
+
+  return (command, number)
+
 # * MAIN
 
 print(f'Advent of Code - {AOC_YEAR} - Day {AOC_DAY:02d} - Problem {AOC_PROBLEM:02d}')
 print(f'{"="*50}\n')
 
 # Get the lines
+
 inputpath = scriptpath / Path('./input.txt')
-input_lines = readFileLines(inputpath, f = int)
+input_lines = readFileLines(inputpath, parseLine)
 
-print(f'There are {len(input_lines)} measurements')
-
-# Count how many are deeper than previous
-count = 0
-
-for i in range(1, len(input_lines)):
-  if input_lines[i] > input_lines[i - 1]:
-    count += 1
+print(f'There are {len(input_lines)} commands\n')
 
 #
-print(f'\t -> {count} are deeper than the previous one')
+horizontal = depth = 0
+
+for command, number in input_lines:
+  if command == 'forward':
+    horizontal += number
+  elif command == 'down':
+    depth += number
+  elif command == 'up':
+    depth -= number
+
+result = horizontal * depth
+
+print(f'horizontal = {horizontal:8d}')
+print(f'     depth = {depth:8d}')
+print(f'{"-"*20}')
+print(f'         * = {result:8d}')
