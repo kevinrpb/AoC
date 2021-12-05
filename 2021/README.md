@@ -11,8 +11,8 @@ Your instincts tell you that in order to save Christmas, you'll need to get all 
 Collect stars by solving puzzles. Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the first. Each puzzle grants one star. Good luck!
 
 * [December 1](01/)
-<!-- * [December 2](02/) -->
-<!-- * [December 3](03/) -->
+* [December 2](02/)
+* [December 3](03/)
 <!-- * [December 4](04/) -->
 <!-- * [December 5](05/) -->
 <!-- * [December 6](06/) -->

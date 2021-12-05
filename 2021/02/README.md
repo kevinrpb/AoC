@@ -40,7 +40,7 @@ Calculate the horizontal position and depth you would have after following the p
 
 ### Solution
 
-> [Source code here](https://github.com/kevinrpb/AoC/blob/main/2021/02/solution1.py)
+> [Source code here](https://github.com/kevinrpb/AoC/blob/main/aoc-code/y2021/d02/solution1.py)
 
 
 ## Problem II
@@ -72,4 +72,4 @@ Using this new interpretation of the commands, calculate the horizontal position
 
 ### Solution
 
-> [Source code here](https://github.com/kevinrpb/AoC/blob/main/2021/02/solution2.py)
+> [Source code here](https://github.com/kevinrpb/AoC/blob/main/aoc-code/y2021/d02/solution2.py)
