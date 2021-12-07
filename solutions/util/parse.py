@@ -17,8 +17,7 @@ def readFileLines(filepath: Path, f: Callable[[str], Any] = str) -> list:
     lines = []
 
     # `readline` reads one line (better do it like this for large files)
-    # `strip` removes leading/trailing whitespace
-    while (line := file.readline().strip()):
+    while (line := file.readline()):
       lines.append(f(line)) # We want integer numbers
 
   return lines
