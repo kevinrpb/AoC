@@ -10,7 +10,7 @@ Advent of Code Solutions
 * [December 1](2021/01/)
 * [December 2](2021/02/)
 * [December 3](2021/03/)
-<!-- * [December 4](2021/04/) -->
+* [December 4](2021/04/)
 <!-- * [December 5](2021/05/) -->
 <!-- * [December 6](2021/06/) -->
 <!-- * [December 7](2021/07/) -->

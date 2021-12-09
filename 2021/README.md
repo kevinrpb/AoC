@@ -13,7 +13,7 @@ Collect stars by solving puzzles. Two puzzles will be made available on each day
 * [December 1](01/)
 * [December 2](02/)
 * [December 3](03/)
-<!-- * [December 4](04/) -->
+* [December 4](04/)
 <!-- * [December 5](05/) -->
 <!-- * [December 6](06/) -->
 <!-- * [December 7](07/) -->

@@ -1,6 +1,6 @@
 > [Back Home](/)   &#124;   [Back to 2021](/2021/)
 
-# AoC 2021 - December 3 - Giant Squid
+# AoC 2021 - December 4 - Giant Squid
 
 > Solutions: [Problem I](#solution)   &#124;   [Problem II](#solution-1)
 
