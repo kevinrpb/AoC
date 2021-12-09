@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
+from collections import Counter
 from pathlib import Path
-from statistics import mode
 
 import numpy as np
 from solutions.util.parse import readFileLines
@@ -49,6 +49,22 @@ def parseGame(lines: list) -> tuple:
 
   return draws, boards
 
+def checkBoards(boards):
+  for index, board in enumerate(boards):
+    # Check rows
+    for rowIndex in range(board.shape[0]):
+      markedCount = Counter(board.marked[rowIndex])[True]
+
+      if markedCount == board.shape[1]:
+        return index, board
+
+    for columnIndex in range(board.shape[1]):
+      markedCount = Counter(board.marked[:,columnIndex])[True]
+
+      if markedCount == board.shape[0]:
+        return index, board
+
+  return None, None
 
 # * MAIN
 
@@ -69,8 +85,35 @@ draws, boards = parseGame(inputLines)
 print(f'  -> We drew {draws.shape[0]} numbers')
 print(f'  -> We have {boards.shape[0]} boards')
 
-print(boards[0])
+lastDraw = None
+winnerIndex = None
+winnerBoard = None
+for index, draw in enumerate(draws):
+  # Save last draw
+  lastDraw = draw
 
-lastNumber = None
-for i, number in enumerate(draws):
-  lastNumber = number
+  # Mark numbers
+  boards.marked[boards.number == draw] = True
+
+  # We can start winning when we have at least 5 draws. This is a small
+  # optimization that becomes important with many boards to check
+  if index > 4:
+    # Check for winner
+    winnerIndex, winnerBoard = checkBoards(boards)
+
+    if winnerBoard is not None:
+      break
+
+if winnerBoard is None:
+  print('  -> None of the boards won')
+  exit()
+
+boardScore = sum(winnerBoard.number[winnerBoard.marked == False])
+result = boardScore * lastDraw
+
+print(f'  -> Board #{winnerIndex+1} (of {boards.shape[0]}) won\n')
+
+print(f'score    = {boardScore:6d}')
+print(f'lastDraw = {lastDraw:6d}')
+print(f'{"-"*40}')
+print(f'{" "*7}* = {result:6d}')
