@@ -66,7 +66,7 @@ To guarantee victory against the giant squid, figure out which board will win fi
 
 ### Solution
 
-> [Source code here](https://github.com/kevinrpb/AoC/blob/main/solutions/y2021/d03/p1.py)
+> [Source code here](https://github.com/kevinrpb/AoC/blob/main/solutions/y2021/d04/p1.py)
 
 
 ## Problem II
@@ -81,4 +81,4 @@ Figure out which board will win last. Once it wins, what would its final score b
 
 ### Solution
 
-> [Source code here](https://github.com/kevinrpb/AoC/blob/main/solutions/y2021/d03/p2.py)
+> [Source code here](https://github.com/kevinrpb/AoC/blob/main/solutions/y2021/d04/p2.py)
