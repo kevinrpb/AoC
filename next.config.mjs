@@ -7,13 +7,20 @@ import typescript from 'highlight.js/lib/languages/typescript'
 const nextConfig = {
   reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  redirects: async () => [
+    {
+      source: '/solutions',
+      destination: '/',
+      permanent: true
+    },
+  ],
 }
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
     remarkPlugins: [],
-    rehypePlugins: [[rehypeHighlight, { languages: { typescript }}]],
+    rehypePlugins: [[rehypeHighlight, { languages: { typescript } }]],
   },
 })
 
