@@ -24,12 +24,14 @@ figcaption {
   display: block;
 }
 
-pre,
-code {
-  font-family: 'Source Code Pro', monospace;
-}
-
 header,
 main {
   -webkit-text-size-adjust: none;
+}
+
+hr {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+
+  opacity: 20%;
 }
