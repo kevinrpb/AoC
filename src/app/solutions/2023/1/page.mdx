@@ -1,0 +1,161 @@
+# --- Day 1: Trebuchet?! ---
+
+> Read [the problem description](https://adventofcode.com/2023/day/1) in the AoC website.
+
+## Part 1
+
+Let's start by looking at our input file. Here's an excerpt from mine:
+
+```txt
+onesix4qqnlzdsevennmmrcgkndlsgm3
+two4xgdjdqtcjk1threelkjdxvfivesix
+sixsix6njhqrnine
+4skbhsbtqc
+one11fpkjsix
+```
+
+As the problem states, we need to retrieve the numbers for each line. One simple way to do that is with a regex substitution. By matching `[^0-9]`, we will target all the characters that are not numbers. In Typescript, for a given line, we can do so by doing:
+
+```ts
+const line = "onesix4qqnlzdsevennmmrcgkndlsgm3"
+const lineNumbers = line.replace(/[^0-9]/g, '') // = "43"
+```
+
+After that, it's a matter of getting the first and last digits on the resulting string (`slice`) is a good candidate for this. Then, we can concatenate both digits and parse them as an integer. Last step is to sum all the resulting numbers.
+
+---
+
+This is the final code:
+
+```ts
+// Our sum starts at zero.
+let sum = 0
+
+// Iterate over the lines.
+//
+// `readLines` is a function that returns an iterator over the lines
+// in the input file. You can also read the whole file, split the
+// lines, and iterate over the array.
+for (const line of readLines('2023/1')) {
+  // 'Erase' all non-number characters from the line
+  const lineNumbers = line.replace(/[^0-9]/g, '')
+  // Pick the first and last characters from the resulting string.
+  // If there is only one character, it will be taken in both places.
+  const firstNumber = lineNumbers.slice(0, 1)
+  const lastNumber = lineNumbers.slice(-1)
+  // Parse the resulting two-digits character into an integer. This
+  // will allow us to add it to the sum.
+  const number = parseInt(`${firstNumber}${lastNumber}`)
+
+  // Print it for traceability.
+  console.log(`${line} | ${lineNumbers} | ${number}`)
+
+  // Sum it.
+  sum += number
+}
+
+// Print our total sum!
+console.log(`\nTotal sum is ${sum}`)
+```
+
+And part of the output:
+
+```txt
+onesix4qqnlzdsevennmmrcgkndlsgm3  |  43 | 43
+two4xgdjdqtcjk1threelkjdxvfivesix |  41 | 41
+sixsix6njhqrnine                  |   6 | 66
+4skbhsbtqc                        |   4 | 44
+one11fpkjsix                      |  11 | 11
+```
+
+## Part 2
+
+Well, this escalated quickly. Coming from part 1, you may get the idea to keep using `replace` to turn the spelled numbers into their digits. This would work if not because **some spelled numbers overlap**! As an example:
+
+```txt
+rntwone5
+```
+
+The digits in this line are `215`. However, if you tried to replace the spells, you may end up with only `25` or `15`. The former would still work out well, but the later would give you an incorrect sum!
+
+Instead, we can still use regex but look at the matches instead of replacing. For example, a regex like `one|1` will match all instances of the digit `1`, whether spelled out or in number form. We can then use this and the `matchAll` function to retrieve all the indices in which the digit appears:
+
+```ts
+const line = "one95zhnineseven1"
+const matches1 = [...line.matchAll(/one|1/g)]
+// matches1 = [ { index: 0, ... }, { index: 16, ... } ]
+const matches9 = [...line.matchAll(/nine|9/g)]
+// matches9 = [ { index: 3, ... }, { index: 7, ... } ]
+```
+
+If we identify where each digit is matched using this technique, we can then sort the matches by the index to know the proper order in which they appear. Once the matches are sorted, we can take the first and last ones. After that, it's the same as in part 1.
+
+Code:
+
+```ts
+const digits = [
+  { digit: '1', regex: /one|1/g },
+  { digit: '2', regex: /two|2/g },
+  { digit: '3', regex: /three|3/g },
+  { digit: '4', regex: /four|4/g },
+  { digit: '5', regex: /five|5/g },
+  { digit: '6', regex: /six|6/g },
+  { digit: '7', regex: /seven|7/g },
+  { digit: '8', regex: /eight|8/g },
+  { digit: '9', regex: /nine|9/g }
+]
+
+// Our sum starts at zero.
+let sum = 0
+
+// Iterate over the lines.
+for (const line of readLines('2023/1')) {
+  const lineNumbers = digits
+    // For each digit, search it in the string and save the indices
+    // where it appears.
+    //
+    // We use `flatMap` here to un-nest the array that we return.
+    // That way, in the next operation we will have an 'array of items'
+    // and not an 'array of array of items'.
+    .flatMap(({ digit, regex }) =>
+      // `matchAll` returns an iterable, we use the spread operator
+      // to turn it into an array so we can `map` it.
+      [...line.matchAll(regex)]
+        .map(({ index }) => ({ index: index ?? -1, digit }))
+    )
+    // Take out those that didn't match.
+    .filter(({ index }) => index !== -1)
+    // Sort remaining by index
+    .sort((a, b) => a.index - b.index)
+    // Get the digits, ordered
+    .map(({ digit }) => digit)
+    // concatenate them
+    .join('')
+
+  // Pick the first and last characters from the resulting string.
+  // If there is only one character, it will be taken in both places.
+  const firstNumber = lineNumbers.slice(0, 1)
+  const lastNumber = lineNumbers.slice(-1)
+
+  // Parse the resulting two-digits character into an integer. This
+  // will allow us to add it to the sum.
+  const number = parseInt(`${firstNumber}${lastNumber}`)
+
+  console.log(`${line} | ${lineNumbers} | ${number}`)
+
+  sum += number
+}
+
+// Print our total sum!
+console.log(`\nTotal sum is ${sum}`)
+```
+
+Output:
+
+```txt
+onesix4qqnlzdsevennmmrcgkndlsgm3  |  16473 | 13
+two4xgdjdqtcjk1threelkjdxvfivesix | 241356 | 26
+sixsix6njhqrnine                  |   6669 | 69
+4skbhsbtqc                        |      4 | 44
+one11fpkjsix                      |   1116 | 16
+```

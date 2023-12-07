@@ -17,7 +17,7 @@ code {
   position: relative;
   display: block;
   white-space: pre-wrap;
-  margin: 0.5em 0;
+  margin-bottom: 0.5em;
   max-width: 45em;
   padding: 0.25em;
 }
@@ -47,6 +47,10 @@ article {
     & + * {
       margin-top: 0;
     }
+  }
+
+  p {
+    margin-bottom: 1em;
   }
 
   em {
