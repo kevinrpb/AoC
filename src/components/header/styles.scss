@@ -1,0 +1,54 @@
+header {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "home-link nav"
+    "year-link nav";
+
+  justify-items: end;
+  gap: 0 1em;
+
+  margin-bottom: 2em;
+
+  h1 {
+    a, span {
+      display: inline-block;
+      text-decoration: none;
+      color: #00cc00;
+      text-shadow: 0 0 2px #00cc00, 0 0 5px #00cc00;
+    }
+
+    a:hover, a:focus {
+      color: #99ff99;
+      text-shadow: 0 0 2px #99ff99, 0 0 5px #99ff99;
+    }
+
+    &#home-link {
+      grid-area: home-link;
+    }
+
+    &#year-link {
+      grid-area: year-link;
+
+      span {
+        opacity: 0.33;
+      }
+    }
+  }
+
+  nav {
+    grid-area: nav;
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    a {
+      display: inline-block;
+      text-decoration: none;
+      outline: none;
+    }
+  }
+}
