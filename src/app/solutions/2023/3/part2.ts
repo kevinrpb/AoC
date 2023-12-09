@@ -16,9 +16,9 @@ const getPartNumbersAroundGear = (
   gearRow: number,
   gearColumn: number
 ): PartNumber[] => {
-  return partNumbers.filter(({row, columns: [startColumn, endColumn]}) => {
+  return partNumbers.filter(({ row, columns: [startColumn, endColumn] }) => {
     // If the number is not within one row of the gear then it cannot be adjacent.
-    if (Math.abs(gearRow - row) > 1){
+    if (Math.abs(gearRow - row) > 1) {
       return false
     }
 
@@ -36,8 +36,7 @@ const getPartNumbersAroundGear = (
 
     // For numbers above or below, they must start or end within one column
     // to be adjacent.
-    return Math.abs(gearColumn - startColumn) <= 1
-        || Math.abs(gearColumn - endColumn) <= 1
+    return Math.abs(gearColumn - startColumn) <= 1 || Math.abs(gearColumn - endColumn) <= 1
   })
 }
 
@@ -59,7 +58,7 @@ const getGears = (grid: string[][], partNumbers: PartNumber[]): Gear[] => {
             row,
             column,
             numbers: [numberA, numberB],
-            ratio: numberA * numberB
+            ratio: numberA * numberB,
           })
         }
       }

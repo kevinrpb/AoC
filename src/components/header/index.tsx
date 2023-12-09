@@ -17,8 +17,12 @@ const Header: React.FC = () => (
     </h1>
 
     <nav>
-      <Link href='https://adventofcode.com' target='_blank'>[adventofcode.com]</Link>
-      <Link href='https://kevinrpb.me' target='_blank'>[kevinrpb.me]</Link>
+      <Link href='https://adventofcode.com' target='_blank'>
+        [adventofcode.com]
+      </Link>
+      <Link href='https://kevinrpb.me' target='_blank'>
+        [kevinrpb.me]
+      </Link>
     </nav>
   </header>
 )

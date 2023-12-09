@@ -7,7 +7,7 @@ export interface GameData {
 }
 
 export const getGameId = (line: string): number => {
-  const idMatch = line.match(/^Game ([0-9]+)\:/) ?? []
+  const idMatch = line.match(/^Game ([0-9]+):/) ?? []
 
   return parseInt(idMatch[1])
 }
@@ -25,9 +25,7 @@ export const parseSet = (setString: String): CubeSet => {
 }
 
 export const getGameSets = (line: string): CubeSet[] => {
-  return line.split(':')[1]
-    .split(';')
-    .map(parseSet)
+  return line.split(':')[1].split(';').map(parseSet)
 }
 
 export const parseLine = (line: string): GameData => {

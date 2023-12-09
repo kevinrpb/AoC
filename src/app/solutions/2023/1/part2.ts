@@ -10,7 +10,7 @@ const digits = [
   { digit: '6', regex: /six|6/g },
   { digit: '7', regex: /seven|7/g },
   { digit: '8', regex: /eight|8/g },
-  { digit: '9', regex: /nine|9/g }
+  { digit: '9', regex: /nine|9/g },
 ]
 
 const solve = async () => {

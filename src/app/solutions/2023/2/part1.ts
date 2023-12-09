@@ -1,23 +1,25 @@
 import { readLines } from '@/lib/input'
 import run from '@/lib/run'
-import { CubeSet, parseLine } from './common';
+import { CubeSet, parseLine } from './common'
 
 const maxCubes: CubeSet = {
   red: 12,
   green: 13,
-  blue: 14
+  blue: 14,
 }
 
 const solve = async () => {
   // Our sum starts at zero.
-  let sum = 0;
+  let sum = 0
 
   // Iterate over the lines.
   for (const line of readLines('2023/2')) {
     const { id, sets } = parseLine(line)
 
-    const validSets = sets
-      .filter(({ red, green, blue }) => red <= maxCubes.red && green <= maxCubes.green && blue <= maxCubes.blue)
+    const validSets = sets.filter(
+      ({ red, green, blue }) =>
+        red <= maxCubes.red && green <= maxCubes.green && blue <= maxCubes.blue
+    )
     const gameIsValid = sets.length === validSets.length
 
     console.log(line)

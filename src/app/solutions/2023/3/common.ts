@@ -1,4 +1,3 @@
-
 export interface PartNumber {
   row: number
   columns: [number, number]
@@ -35,13 +34,13 @@ const processPartNumber = (
       // If the character is not a number or a period, then it's a symbol.
       if (validSymbols.includes(character)) {
         const numberLine = grid[row]
-        const numberString = numberLine.slice(startColumn, endColumn+1).join('')
+        const numberString = numberLine.slice(startColumn, endColumn + 1).join('')
 
         return {
           row,
           columns: [startColumn, endColumn],
           size: numberString.length,
-          value: parseInt(numberString)
+          value: parseInt(numberString),
         }
       }
     }
@@ -72,7 +71,13 @@ export const getPartNumbers = (grid: string[][], validSymbols: string = SYMBOLS)
         // If we reach something that is not a number but we were tracking
         // one, then we process it.
         if (numberStartColumn !== undefined) {
-          const newNumber = processPartNumber(grid, row, numberStartColumn, column-1, validSymbols)
+          const newNumber = processPartNumber(
+            grid,
+            row,
+            numberStartColumn,
+            column - 1,
+            validSymbols
+          )
 
           // If the number is actually a part, save it.
           if (newNumber !== undefined) {
@@ -88,7 +93,13 @@ export const getPartNumbers = (grid: string[][], validSymbols: string = SYMBOLS)
     // When we are done with a line, if we were tracking a number then we
     // process it.
     if (numberStartColumn !== undefined) {
-      const newNumber = processPartNumber(grid, row, numberStartColumn, line.length - 1, validSymbols)
+      const newNumber = processPartNumber(
+        grid,
+        row,
+        numberStartColumn,
+        line.length - 1,
+        validSymbols
+      )
 
       // If the number is actually a part, save it.
       if (newNumber !== undefined) {
